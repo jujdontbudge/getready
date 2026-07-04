@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get Ready — Privacy Policy</title>
+<meta name="description" content="Get Ready privacy policy. Completion photos are checked on-device and never uploaded. No accounts. Screen Time data stays on your device." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --dawn:#FF7A45; --dawn-deep:#C7401F; --ink:#1A140F; --paper:#FBF4EC; --chalk:#FFFFFF;
+    --mono:'Spline Sans Mono',ui-monospace,monospace;
+    --body:'Instrument Sans',-apple-system,sans-serif;
+    --display:'Anton',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .band{background:var(--dawn);border-bottom:6px solid var(--chalk);color:var(--chalk)}
+  .band-inner{max-width:820px;margin:0 auto;padding:26px 24px 40px}
+  .band a{color:var(--chalk);text-decoration:none;font-size:14.5px;border-bottom:1px solid rgba(255,255,255,.45)}
+  .band a:hover{border-color:var(--chalk)}
+  h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(38px,6vw,58px);line-height:1;margin-top:22px}
+  .meta{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:12px}
+  .wrap{max-width:820px;margin:0 auto;padding:44px 24px 80px}
+  .lede{font-size:18px;max-width:640px}
+  .box{background:var(--chalk);border:1px solid #e6d8ca;border-left:5px solid var(--dawn);border-radius:8px;padding:18px 22px;margin:26px 0;font-weight:500}
+  h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:24px;letter-spacing:.01em;margin:38px 0 10px}
+  p{color:#3d3229;margin:10px 0}
+  ul{margin:10px 0 10px 22px;color:#3d3229}
+  li{margin:8px 0}
+  strong{color:var(--ink)}
+  .wrap a{color:var(--dawn-deep);font-weight:600;text-decoration:none;border-bottom:2px solid var(--dawn-deep)}
+  .wrap a:hover{opacity:.8}
+  a:focus-visible{outline:2.5px solid var(--dawn);outline-offset:3px;border-radius:3px}
+  .band a:focus-visible{outline-color:var(--chalk)}
+  footer{margin-top:52px;padding-top:22px;border-top:2px solid var(--ink);font-size:14px;color:#5a4c3e}
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="band-inner">
+    <a href="index.html">← Get Ready</a>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated · July 2026</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <p class="lede">Get Ready is an independent iOS app developed by Johan Sardar. This policy explains exactly
+     what data the app touches and where it lives. The short version: <strong>your completion photos and
+     your routines stay on your device.</strong></p>
+
+  <div class="box">
+    No account. No photo upload. Get Ready does not require you to sign up, does not upload your completion
+    photos, and does not include third-party analytics or advertising SDKs that profile you.
+  </div>
+
+  <h2>1. Completion photos (camera)</h2>
+  <p>To finish a routine, Get Ready asks you to take a live photo of yourself dressed and checks it with an
+     <strong>on-device</strong> model to confirm a dressed person is in frame.</p>
+  <ul>
+    <li>The photo is captured live in the app and analyzed <strong>entirely on your device</strong>.</li>
+    <li>It is <strong>never</strong> uploaded, transmitted, sold, or shared. It does not leave your phone.</li>
+    <li>You can revoke camera access at any time in iOS Settings.</li>
+  </ul>
+
+  <h2>2. Your routines &amp; settings</h2>
+  <p>The routines you create, their phases, durations, and your settings are stored <strong>locally on your
+     device</strong>. Get Ready has no user accounts and no backend server for your content.</p>
+
+  <h2>3. Voice callouts (ElevenLabs)</h2>
+  <p>Stock voice lines are generated ahead of time and shipped with the app. If you write a <strong>custom
+     callout line</strong>, the <strong>text you type</strong> is sent to ElevenLabs to generate the audio in
+     the voice you chose; the resulting audio is then cached on your device and played from there.</p>
+  <ul>
+    <li>Only the custom line <strong>text you author</strong> is sent, only at the moment you create it, only
+        to generate that audio.</li>
+    <li>Running a routine never needs the network — audio plays from your device.</li>
+  </ul>
+
+  <h2>4. Screen Time data (Focus Lock)</h2>
+  <p>Get Ready's optional <strong>Focus Lock</strong> feature uses Apple's native <strong>Family Controls,
+     Managed Settings, and Device Activity</strong> frameworks to let you block your own chosen apps while a
+     routine is running.</p>
+  <ul>
+    <li>The apps you select are represented to Get Ready as <strong>opaque tokens</strong>. We cannot see,
+        read, decode, or reconstruct which apps they are.</li>
+    <li>These tokens and your selections are stored <strong>locally on device</strong> in a secure shared App
+        Group container so the app and its system extensions can coordinate. None of it is transmitted off
+        the device.</li>
+    <li>Focus Lock manages restrictions on <strong>your own device only</strong>. Get Ready is not a
+        parental-control product and uses individual Screen Time authorization, which you can revoke in
+        Settings at any time.</li>
+  </ul>
+
+  <h2>5. Subscriptions</h2>
+  <p>Get Ready offers a paid subscription. Payment is handled by <strong>Apple</strong>, and subscription
+     status is managed through a subscription provider (RevenueCat). Apple processes the transaction; Get
+     Ready does not receive or store your payment-card details.</p>
+
+  <h2>6. What we do NOT do</h2>
+  <ul>
+    <li>We do not upload or store your completion photos anywhere off your device.</li>
+    <li>We do not build a profile of your app usage or browsing history.</li>
+    <li>We do not sell or share your data with advertisers or data brokers.</li>
+  </ul>
+
+  <h2>7. Children</h2>
+  <p>Get Ready is designed for <strong>adults managing their own device</strong> and, for Focus Lock, uses
+     individual Screen Time authorization. It is not a parental-control product.</p>
+
+  <h2>8. Contact</h2>
+  <p>Questions about this policy or your data: <a href="mailto:johansardar77@gmail.com">johansardar77@gmail.com</a>.</p>
+
+  <footer>
+    Get Ready — an independent iOS app by Johan Sardar. This policy applies to the Get Ready iOS app.
+  </footer>
+</div>
+</body>
+</html>

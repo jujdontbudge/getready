@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get Ready — Beat the getting-ready black hole</title>
+<meta name="description" content="Get Ready is a voice-driven routine timer that pushes you through your shower and getting-ready routine phase by phase — and isn't done until you photograph yourself dressed and the app checks. iOS, on-device, private." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --dawn:#FF7A45;        /* sunrise orange */
+    --dawn-deep:#C7401F;
+    --ink:#1A140F;
+    --paper:#FBF4EC;       /* warm paper */
+    --go:#12A150;
+    --wait:#E5484D;
+    --chalk:#FFFFFF;
+    --mono:'Spline Sans Mono',ui-monospace,monospace;
+    --body:'Instrument Sans',-apple-system,sans-serif;
+    --display:'Anton',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(120% 80% at 85% 0%, rgba(255,255,255,.18) 0%, transparent 55%),
+      linear-gradient(180deg, var(--dawn) 0%, var(--dawn-deep) 100%);
+    color:var(--chalk);
+    border-bottom:6px solid var(--chalk);
+  }
+  .hero-inner{max-width:1120px;margin:0 auto;padding:0 24px 72px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:26px 0 0}
+  .wordmark{font-family:var(--display);font-size:22px;letter-spacing:.06em;color:var(--chalk);text-decoration:none}
+  .topnav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:14.5px;font-weight:500;margin-left:26px}
+  .topnav a:hover{color:var(--chalk);text-decoration:underline;text-underline-offset:4px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:72px}
+  .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:22px}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,8vw,108px);line-height:.94;letter-spacing:.005em;text-transform:uppercase}
+  .hero-sub{font-size:19px;line-height:1.55;color:rgba(255,255,255,.92);max-width:470px;margin-top:26px}
+  .hero-sub strong{color:var(--chalk)}
+  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;padding:13px 24px;border-radius:6px}
+  .btn-chalk{background:var(--chalk);color:var(--dawn-deep)}
+  .btn-chalk:hover{background:#fff0e8}
+  .btn-line{color:var(--chalk);border:1.5px solid rgba(255,255,255,.55)}
+  .btn-line:hover{border-color:var(--chalk)}
+
+  /* ---------- SIGNATURE: the talking timeline ---------- */
+  .phone{
+    background:var(--ink);border-radius:26px;padding:12px;
+    box-shadow:0 26px 64px rgba(60,20,8,.42);max-width:340px;margin:0 auto;
+  }
+  .screen{background:var(--chalk);border-radius:16px;overflow:hidden;font-family:var(--mono)}
+  .screen-head{background:var(--paper);padding:16px 18px 12px;border-bottom:1px solid #ecdfd2}
+  .screen-title{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:#8a7867;font-weight:600}
+  .screen-routine{font-family:var(--body);font-weight:600;font-size:17px;color:var(--ink);margin-top:3px}
+  .tl{list-style:none;padding:10px 0 6px}
+  .ph{display:grid;grid-template-columns:20px 1fr auto;gap:12px;align-items:center;padding:11px 18px;font-size:14.5px;position:relative}
+  .dot{width:11px;height:11px;border-radius:50%;border:2px solid #d8c8b8;background:var(--chalk);margin-top:1px}
+  .pn{font-family:var(--body);color:#8a7867}
+  .pt{font-size:12.5px;color:#b3a493;font-variant-numeric:tabular-nums}
+  .ph.active .dot{border-color:var(--dawn);background:var(--dawn);box-shadow:0 0 0 4px rgba(255,122,69,.2)}
+  .ph.active .pn{color:var(--ink);font-weight:600}
+  .ph.done .dot{border-color:var(--go);background:var(--go)}
+  .ph.done .pn{color:#6d5f50}
+  .say{grid-column:2 / 4;font-family:var(--body);font-size:13px;color:var(--dawn-deep);background:#fff2ea;border-radius:8px;padding:7px 11px;margin-top:6px;opacity:0;transform:translateY(-3px);transition:opacity .3s,transform .3s}
+  .ph.active .say{opacity:1;transform:none}
+  .say:before{content:"🔊 ";}
+  .gate{margin:6px 14px 16px;border-top:1px dashed #e0d0c0;padding-top:14px;text-align:center}
+  .gate-lbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#8a7867}
+  .gate-btn{font-family:var(--body);font-weight:600;font-size:14.5px;margin-top:8px;display:inline-block;padding:10px 18px;border-radius:8px;background:var(--ink);color:var(--chalk);opacity:.35;transition:opacity .4s,background .4s}
+  .gate.ready .gate-btn{opacity:1;background:var(--go)}
+  .gate.ready .gate-lbl{color:var(--go)}
+  .replay{display:block;margin:14px auto 0;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;color:rgba(255,255,255,.8);cursor:pointer;padding:4px 8px}
+  .replay:hover{color:var(--chalk);text-decoration:underline;text-underline-offset:4px}
+
+  /* ---------- BODY ---------- */
+  .section{max-width:1120px;margin:0 auto;padding:84px 24px 0}
+  .section:last-of-type{padding-bottom:84px}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dawn-deep);font-weight:600;margin-bottom:14px}
+  h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,44px);text-transform:uppercase;letter-spacing:.01em;line-height:1.05;margin-bottom:14px}
+  .section-sub{font-size:17px;color:#5a4c3e;max-width:580px}
+
+  .steps{margin-top:40px;border-top:2px solid var(--ink)}
+  .step{display:grid;grid-template-columns:120px 210px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid #e6d8ca;align-items:baseline}
+  .step-verb{font-family:var(--display);font-size:24px;text-transform:uppercase;color:var(--dawn-deep)}
+  .step-name{font-weight:600;font-size:16.5px}
+  .step-body{color:#5a4c3e;font-size:15.5px;max-width:620px}
+
+  .priv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+  .priv-card{background:var(--chalk);border:1px solid #e6d8ca;border-radius:10px;padding:22px 24px}
+  .priv-card h3{font-size:16px;font-weight:600;margin-bottom:7px}
+  .priv-card p{font-size:14.5px;color:#5a4c3e}
+  .priv-link{display:inline-block;margin-top:26px;font-weight:600;color:var(--dawn-deep);text-decoration:none;border-bottom:2px solid var(--dawn-deep);padding-bottom:2px}
+  .priv-link:hover{opacity:.8}
+
+  .soon{margin-top:34px;background:var(--chalk);border:1px solid #e6d8ca;border-left:5px solid var(--dawn);border-radius:8px;padding:18px 22px;max-width:640px}
+  .soon strong{color:var(--ink)}
+  .soon p{font-size:15px;color:#5a4c3e;margin-top:4px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.75);margin-top:84px}
+  .foot-inner{max-width:1120px;margin:0 auto;padding:44px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:14.5px}
+  footer a{color:var(--chalk);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
+  footer a:hover{border-color:var(--chalk)}
+  .foot-mark{font-family:var(--display);letter-spacing:.06em;color:var(--chalk);font-size:17px}
+
+  a:focus-visible,button:focus-visible{outline:2.5px solid var(--dawn);outline-offset:3px;border-radius:3px}
+  .hero a:focus-visible,.hero button:focus-visible{outline-color:var(--chalk)}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;padding-top:52px}
+    .step{grid-template-columns:1fr;gap:6px;padding:20px 0}
+    .priv-grid{grid-template-columns:1fr}
+    .topnav a{margin-left:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .say{opacity:1;transform:none}
+    .replay{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="topbar">
+      <a class="wordmark" href="#">GET READY</a>
+      <nav class="topnav">
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#support">Support</a>
+      </nav>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">iOS · In development</p>
+        <h1>Get out of<br />the bathroom.</h1>
+        <p class="hero-sub">
+          Get Ready is a voice that <strong>pushes you through</strong> your shower and
+          getting-ready routine, phase by phase — and it isn't done until you
+          <strong>photograph yourself dressed</strong> and the app checks.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-chalk" href="#how">See the routine</a>
+          <a class="btn btn-line" href="privacy.html">Privacy policy</a>
+        </div>
+      </div>
+
+      <!-- SIGNATURE: a routine as a talking timeline -->
+      <div>
+        <div class="phone" aria-label="Example of a Get Ready routine playing as a talking timeline">
+          <div class="screen">
+            <div class="screen-head">
+              <div class="screen-title">Now running</div>
+              <div class="screen-routine">Morning Full</div>
+            </div>
+            <ul class="tl" id="tl">
+              <li class="ph" data-say="Water on. Shampoo in."><span class="dot"></span><span class="pn">Shampoo</span><span class="pt">2:00</span><span class="say">Water on. Shampoo in.</span></li>
+              <li class="ph" data-say="Rinse it out. Conditioner now."><span class="dot"></span><span class="pn">Conditioner</span><span class="pt">3:00</span><span class="say">Rinse it out. Conditioner now.</span></li>
+              <li class="ph" data-say="Rinse and get out of the shower."><span class="dot"></span><span class="pn">Get out</span><span class="pt">1:00</span><span class="say">Rinse and get out of the shower.</span></li>
+              <li class="ph" data-say="Dry off. Skincare."><span class="dot"></span><span class="pn">Dry &amp; skincare</span><span class="pt">3:00</span><span class="say">Dry off. Skincare.</span></li>
+              <li class="ph" data-say="Get dressed. You're almost out."><span class="dot"></span><span class="pn">Get dressed</span><span class="pt">4:00</span><span class="say">Get dressed. You're almost out.</span></li>
+            </ul>
+            <div class="gate" id="gate">
+              <div class="gate-lbl" id="gateLbl">Locked until you finish</div>
+              <span class="gate-btn" id="gateBtn">📸 Photo to finish</span>
+            </div>
+          </div>
+        </div>
+        <button class="replay" id="replay" type="button">↻ Replay the routine</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <p class="eyebrow">How it works</p>
+  <h2>Pick it. Run it. Prove it.</h2>
+  <p class="section-sub">No streaks, no shaming, no history to obsess over. A voice does the executive-function work, and a photo proves you actually finished.</p>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-verb">Pick</span>
+      <span class="step-name">Choose a routine</span>
+      <span class="step-body">Build named routines — Morning Full, Quick Rinse, Night — each an ordered list of phases with your own durations. Tap one and start.</span>
+    </div>
+    <div class="step">
+      <span class="step-verb">Run</span>
+      <span class="step-name">The phone talks you through</span>
+      <span class="step-body">A real voice calls out each phase right on the clock — no touching a screen with wet hands. Finished a phase early? One big button skips ahead.</span>
+    </div>
+    <div class="step">
+      <span class="step-verb">Prove</span>
+      <span class="step-name">A photo finishes it</span>
+      <span class="step-body">The routine only completes when you snap a live photo of yourself dressed and an on-device check confirms it. Old pictures don't count — and the photo never leaves your phone.</span>
+    </div>
+  </div>
+
+  <div class="soon">
+    <strong>Coming: Focus Lock.</strong>
+    <p>An optional shield that blocks your own distracting apps <em>while a routine is running</em>, so the phone can't eat the morning — built on Apple's Screen Time technology, and unlocked the moment you finish. You choose which apps; it only ever manages your own device.</p>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="section" id="privacy">
+  <p class="eyebrow">Privacy</p>
+  <h2>The photo never leaves your phone.</h2>
+  <p class="section-sub">Get Ready checks that you're dressed using an on-device model. There's no account and no photo upload — the completion picture is analyzed locally and stays on your device.</p>
+
+  <div class="priv-grid">
+    <div class="priv-card">
+      <h3>Photos stay on-device</h3>
+      <p>The completion photo is captured live in the app, checked by an on-device model, and never uploaded, stored on a server, or shared.</p>
+    </div>
+    <div class="priv-card">
+      <h3>No account, no profile</h3>
+      <p>There's nothing to sign up for. Your routines live on your device. Get Ready doesn't build a profile of you or your habits.</p>
+    </div>
+    <div class="priv-card">
+      <h3>Voice made ahead of time</h3>
+      <p>Callouts are generated when you set up a routine, then played from your device. A run never needs the network — only writing a custom line does.</p>
+    </div>
+    <div class="priv-card">
+      <h3>Focus Lock sees opaque tokens</h3>
+      <p>When Focus Lock arrives, the apps you block are opaque tokens — Get Ready can't read or learn which apps they are. It only manages your own device.</p>
+    </div>
+  </div>
+  <a class="priv-link" href="privacy.html">Read the full privacy policy</a>
+</section>
+
+<!-- ============ FOOTER / SUPPORT ============ -->
+<footer id="support">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-mark">GET READY</div>
+      <p style="margin-top:8px">An independent iOS app by Johan Sardar.</p>
+    </div>
+    <div>
+      <p>Support &amp; questions: <a href="mailto:johansardar77@gmail.com">johansardar77@gmail.com</a></p>
+      <p style="margin-top:8px"><a href="privacy.html">Privacy policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  var phases = Array.prototype.slice.call(document.querySelectorAll('.ph'));
+  var gate = document.getElementById('gate');
+  var gateLbl = document.getElementById('gateLbl');
+  var replay = document.getElementById('replay');
+  var timers = [];
+
+  function reset(){
+    phases.forEach(function(p){ p.classList.remove('active','done'); });
+    gate.classList.remove('ready');
+    gateLbl.textContent = 'Locked until you finish';
+  }
+
+  function play(){
+    timers.forEach(clearTimeout); timers = [];
+    reset();
+    phases.forEach(function(p, i){
+      timers.push(setTimeout(function(){
+        phases.forEach(function(q, j){ if (j < i) q.classList.add('done'); q.classList.remove('active'); });
+        p.classList.add('active');
+      }, 400 + i*1400));
+    });
+    timers.push(setTimeout(function(){
+      phases.forEach(function(q){ q.classList.remove('active'); q.classList.add('done'); });
+      gate.classList.add('ready');
+      gateLbl.textContent = 'Dressed — checked. Done.';
+    }, 400 + phases.length*1400));
+  }
+
+  replay.addEventListener('click', play);
+  play();
+})();
+</script>
+</body>
+</html>
